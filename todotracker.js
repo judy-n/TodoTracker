@@ -40,14 +40,24 @@ function TodoTracker() {
     </div>
     `
 
-    // Add squares
+    // Add squares to DOM 
     const squares = this.element.querySelector('.squares');
     for (var i = 1; i < 122; i++) {
     const level = Math.floor(Math.random() * 4);  
     squares.insertAdjacentHTML('beforeend', `<li data-level="${level}"></li>`);
     }
 
+    // Add button adds an element to the list
     this.element.querySelector('#add-btn').addEventListener('click', ()=>this.addToList(this.element))
+
+    // Enter key adds element to the list (if it's in focus) 
+    document.activeElement.addEventListener("keyup", (e)=> {
+        if (e.keyCode === 13){
+            e.preventDefault();
+            this.addToList(this.element)
+        }
+    })
+
     document.body.appendChild(this.element)
 }
 
