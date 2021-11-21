@@ -9,7 +9,7 @@ function TodoTracker() {
     this.element.innerHTML = 
     `<div class="todolist-container">
     <div class="todolist-add">
-        <input type="text" id="todoInput" placeholder="Type a task here...">
+        <input type="text" spellcheck="false" id="todoInput" placeholder="Type a task here...">
         <a href="#" id="add-btn">+</a>
     </div>
 
@@ -18,7 +18,35 @@ function TodoTracker() {
         </ul>
     </div>
     </div>
+
+    <div class="graph">
+    <ul class="months">
+      <li>Sep</li>
+      <li>Oct</li>
+      <li>Nov</li>
+      <li>Dec</li> 
+    </ul>
+    <ul class="days">
+      <li>Sun</li>
+      <li>Mon</li>
+      <li>Tue</li>
+      <li>Wed</li>
+      <li>Thu</li>
+      <li>Fri</li>
+      <li>Sat</li>
+    </ul>
+    <ul class="squares">
+    </ul>
+    </div>
     `
+
+    // Add squares
+    const squares = this.element.querySelector('.squares');
+    for (var i = 1; i < 122; i++) {
+    const level = Math.floor(Math.random() * 4);  
+    squares.insertAdjacentHTML('beforeend', `<li data-level="${level}"></li>`);
+    }
+
     this.element.querySelector('#add-btn').addEventListener('click', ()=>this.addToList(this.element))
     document.body.appendChild(this.element)
 }
@@ -46,5 +74,4 @@ TodoTracker.prototype = {
         const toRemove = e.target.parentElement.parentElement;
         todolist.removeChild(toRemove)
     }
-
 }

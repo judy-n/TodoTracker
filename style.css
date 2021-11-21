@@ -6,6 +6,10 @@ body {
   display: flex;
 }
 
+/* - - - - - - - - - - - - - - */
+/* Styles for the to-do list  */
+/* - - - - - - - - - - - - - - */
+
 .todolist-add {
   width: 100%;
   display: flex;
@@ -14,14 +18,14 @@ body {
 .todolist-add a {
   margin: 0.5rem;
   margin-left: 0;
-  border: 2px solid #274c77;
+  border: 2px solid #5583b8;
   border-radius: 5px;
   text-decoration: none;
   box-sizing: border-box;
   padding-left: 0.5rem;
   padding-right: 0.5rem;
   color: #274c77;
-  background-color: #274c77;
+  background-color: #5583b8;
   color: white;
   font-size: 2em;
   box-shadow: 0 1px 5px rgb(0 0 0 / 20%);
@@ -30,7 +34,7 @@ body {
 
 .todolist-add a:hover {
   background: none;
-  color: #274c77;
+  color: #5583b8;
   transition: 0.2s;
 }
 
@@ -75,15 +79,12 @@ hr {
 
 .todolist-container {
   width: 35%;
+  /* border-right: 2px dashed rgb(232, 232, 232); */
 }
 
 .todolist-list ul li:hover {
   background-color: white;
   box-shadow: 0 1px 1px rgb(0 0 0 / 40%);
-}
-
-.container {
-  display: flex;
 }
 
 .todolist-list input {
@@ -125,11 +126,6 @@ input:checked:hover {
   left: 0;
   top: 0;
 }
-.todolist-list input:focus,
-input:hover {
-  box-shadow: 0 0 0 3px #ebebeb;
-  border-color: #8c8c8c;
-}
 
 .todolist-list label {
   display: inline-block;
@@ -152,3 +148,96 @@ input:hover {
 .todolist-list ul li:hover img {
   opacity: 1;
 }
+
+/* - - - - - - - - - - - - - - */
+/* Styles for the graph        */
+/* - - - - - - - - - - - - - - */
+
+:root {
+  --square-size: 15px;
+  --square-gap: 5px;
+  --week-width: calc(var(--square-size) + var(--square-gap));
+}
+
+.months {
+  grid-area: months;
+}
+.days {
+  grid-area: days;
+  margin-top: 0;
+}
+.squares {
+  grid-area: squares;
+}
+
+.graph {
+  display: inline-grid;
+  grid-template-areas:
+    "empty months"
+    "days squares";
+  grid-template-columns: auto 1fr;
+  /* grid-gap: 10px; */
+}
+
+.months {
+  margin-top: auto;
+  display: grid;
+  grid-template-columns:
+    calc(var(--week-width) * 4) /* Sep */
+    calc(var(--week-width) * 5) /* Oct */
+    calc(var(--week-width) * 4) /* Nov */
+    calc(var(--week-width) * 5) /* Dec */;
+}
+
+.days,
+.squares {
+  display: grid;
+  grid-gap: var(--square-gap);
+  grid-template-rows: repeat(7, var(--square-size));
+}
+
+.squares {
+  grid-auto-flow: column;
+  grid-auto-columns: var(--square-size);
+  margin-right: 1rem;
+  padding-left: 1rem;
+  margin-top: 0;
+}
+
+.graph {
+  margin-left: 3rem;
+  margin-top: 0.5rem;
+  box-shadow: 0 1px 5px rgb(0 0 0 / 20%);
+  border-radius: 5px;
+}
+
+.days li:nth-child(odd) {
+  visibility: hidden;
+}
+
+.squares li {
+  background-color: #ebedf0;
+}
+
+.squares li[data-level="1"] {
+  /* background-color: #c6e48b; */
+  background-color: rgb(215, 234, 255);
+}
+
+.squares li[data-level="2"] {
+  /* background-color: #7bc96f; */
+  background-color: rgb(150, 197, 250);
+}
+
+.squares li[data-level="3"] {
+  /* background-color: #196127; */
+  background-color: #5583b8;
+}
+
+.graph ul {
+  list-style: none;
+}
+
+/* lvl 3 rgb(39, 76, 119) */
+/* lvl 2 rgb(139 189 246) */
+/* lvl1 rgb(197 224 255) */
