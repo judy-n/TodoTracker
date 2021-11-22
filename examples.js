@@ -1,3 +1,3 @@
 "use strict";
 
-const todo = new TodoTracker()
+const todo = new TodoTracker(3)
