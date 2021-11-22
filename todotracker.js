@@ -1,19 +1,29 @@
 "use strict";
 
-function TodoTracker(time) {
+function TodoTracker(random, time, start) {
 
-    // Number of months for the graph
+    // Number of months to have in the graph
     this.length = time;
 
-    // If time parameter wasn't passed in, default is 122 days (4 months)
+    // Month (1-12) to start the graph from
+    this.start = start;
+
+    // If time parameter wasn't passed in, default is 4 months
     if (time == undefined) {
         this.length = 4;
     }
 
-    // The starting month will be the current month
+    // If start parameter wasn't passed in, the default starting month is the current month
     const d = new Date();
-    let curr_month = d.getMonth();
     let curr_year = d.getFullYear();
+    let curr_month = 0;
+    
+    if (start == undefined) {
+        curr_month = d.getMonth();
+    } else {
+        curr_month = start-1;
+    }
+    
 
     const month_names = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", 
                     "Sep", "Oct", "Nov", "Dec"]
@@ -38,7 +48,14 @@ function TodoTracker(time) {
         j++;
     }
 
-    this.todolist = []
+    // If random parameter is true, the graph will have random square colors (for proof of concept). 
+    // Otherwise it will start out empty.
+
+    if (random == undefined) {
+        this.randomize = false;
+    } else {
+        this.randomize = random;
+    }
     
     this.element = document.createElement('div')
     this.element.className = "todotracker-container" 
@@ -80,12 +97,14 @@ function TodoTracker(time) {
     }
     months.style.gridTemplateColumns = month_style;
 
-
+    let level = 0;
 
     // Add squares to DOM 
     const squares = this.element.querySelector('.squares');
     for (let i = 1; i <= total_days; i++) {
-    const level = Math.floor(Math.random() * 4);  
+        if (this.randomize) {
+            level = Math.floor(Math.random() * 4);  
+        } 
     squares.insertAdjacentHTML('beforeend', `<li data-level="${level}"></li>`);
     }
     
