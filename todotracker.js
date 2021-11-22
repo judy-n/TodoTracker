@@ -10,8 +10,6 @@ function TodoTracker(time) {
         this.length = 4;
     }
 
-    // let num_months = Math.floor(this.length / 30); 
-
     // The starting month will be the current month
     const d = new Date();
     let curr_month = d.getMonth();
@@ -39,7 +37,6 @@ function TodoTracker(time) {
         counter ++;
         j++;
     }
-    // console.log(months_to_display)
 
     this.todolist = []
     
@@ -74,13 +71,14 @@ function TodoTracker(time) {
     </ul>
     </div>
     `
-
     // Add months to DOM
+    let month_style = "";
     const months = this.element.querySelector('.months');
     for (let k = 0; k < months_to_display.length; k++){
         months.insertAdjacentHTML('beforeend', `<li>${months_to_display[k]}</li>`)
+        month_style += "calc(var(--week-width) * 4) "
     }
-    months.style.gridTemplateColumns = "";
+    months.style.gridTemplateColumns = month_style;
 
 
 
