@@ -38,15 +38,18 @@ function TodoTracker(random, time, start) {
     let counter = 0;
     let j = curr_month;
     let months_to_display = [];
+    let month_to_display_ids =[];
     while (counter < this.length) {
         if (j > 11) {
             j = 0
         }
         months_to_display.push(month_names[j])
+        month_to_display_ids.push(j)
         total_days += month_days[j]
         counter ++;
         j++;
     }
+
 
     // If random parameter is true, the graph will have random square colors (for proof of concept). 
     // Otherwise it will start out empty.
@@ -88,6 +91,7 @@ function TodoTracker(random, time, start) {
     </ul>
     </div>
     `
+
     // Add months to DOM
     let month_style = "";
     const months = this.element.querySelector('.months');
@@ -97,19 +101,30 @@ function TodoTracker(random, time, start) {
     }
     months.style.gridTemplateColumns = month_style;
 
-    let level = 0;
 
     // Add squares to DOM 
+    let level = 0;
     const squares = this.element.querySelector('.squares');
-    for (let i = 1; i <= total_days; i++) {
-        if (this.randomize) {
-            level = Math.floor(Math.random() * 4);  
-        } 
-    squares.insertAdjacentHTML('beforeend', `<li data-level="${level}"></li>`);
+    let month_id = 1;
+
+    for (let f = 0; f < month_to_display_ids.length; f++){
+        for (let h=0; h < month_days[month_to_display_ids[f]]; h++){
+            if (this.randomize) {
+                level = Math.floor(Math.random() * 4);  
+            } 
+            // Each has an id in the form "month/day"
+            squares.insertAdjacentHTML('beforeend', `<li data-level="${level}" id="md${month_to_display_ids[f]+1}/${month_id}"></li>`);
+            month_id++;
+        }
+        month_id=1;
     }
+    // console.log(document.querySelector(`#md${11}\\/${22}`).value)
+
+    // Keeps track of completed list items
+    this.completed = {}
     
     // Add button adds an element to the list
-    this.element.querySelector('#add-btn').addEventListener('click', ()=>this.addToList(this.element))
+    this.element.querySelector('#add-btn').addEventListener('click', ()=>this.addToList(this.element, this.completed))
 
     // Enter key adds element to the list (if it's in focus) 
     document.activeElement.addEventListener("keyup", (e)=> {
@@ -124,19 +139,30 @@ function TodoTracker(random, time, start) {
 
 TodoTracker.prototype = {
 
-    addToList: function(element) {
+    addToList: function(element, completed) {
         const todolist = element.querySelector(".ListItems");
         const toAdd = element.querySelector("#todoInput").value
         const child = document.createElement('li')
         const lastChild = todolist.children[0]
         child.innerHTML = 
-        `<input type='checkbox'>
+        `<input type='checkbox' id='check'>
         <label>${toAdd}</label>
         <a href='#'><img class='trashcan' src='https://img.icons8.com/external-kiranshastry-lineal-kiranshastry/64/000000/external-delete-miscellaneous-kiranshastry-lineal-kiranshastry.png'></a>
         `
         todolist.insertBefore(child, lastChild);
         element.querySelector("#todoInput").value = ''
+        // Trashcan button deletes the item from list
         child.querySelector('.trashcan').addEventListener('click', (e)=> this.deleteFromList(e, element))
+
+        // Keep track of completed items 
+        child.querySelector('#check').addEventListener('change', (e)=> {
+            if (e.target.checked){
+                this.addToCompleted(e, element, this.completed)
+            } else {
+                this.removeFromCompleted(e, this.completed)
+            }
+        });
+        
     },
 
     deleteFromList: function(e, element) {
@@ -144,5 +170,43 @@ TodoTracker.prototype = {
         const todolist = element.querySelector(".ListItems");
         const toRemove = e.target.parentElement.parentElement;
         todolist.removeChild(toRemove)
+    },
+
+    addToCompleted: function(e, element, completed) {
+        e.preventDefault();
+        const today = new Date();
+        let dateCompleted = today.getMonth()+1 + "/" + today.getDate()
+        const completedItem = e.target.parentElement.children[1].innerText
+   
+        if (dateCompleted in completed) {
+            completed[dateCompleted].push(completedItem)
+        } else {
+            completed[dateCompleted]= [completedItem]
+        }
+        console.log(completed)
+        let curr_square = document.querySelector(`#md${today.getMonth()+1}\\/${today.getDate()}`);
+        let curr_lvl = curr_square.getAttribute("data-level");
+        if (curr_lvl < 3) {
+            console.log("hi im completed")
+            curr_square.setAttribute("data-level", parseInt(curr_lvl)+ 1)
+        }
+    
+        
+    },
+
+    removeFromCompleted: function(e, completed) {
+        e.preventDefault();
+        const today = new Date();
+        let dateCompleted = today.getMonth()+1 + "/" + today.getDate()
+
+        const completedItem = e.target.parentElement.children[1].innerText
+        completed[dateCompleted].splice(completed[dateCompleted].indexOf(completedItem),1)
+        
+    
+        let curr_square = document.querySelector(`#md${today.getMonth()+1}\\/${today.getDate()}`);
+        let curr_lvl = curr_square.getAttribute("data-level");
+        if (curr_lvl > 0) {
+            curr_square.setAttribute("data-level", parseInt(curr_lvl)-1)
+        }
     }
 }
