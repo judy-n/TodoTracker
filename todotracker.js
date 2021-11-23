@@ -9,17 +9,17 @@ function TodoTracker(random, time, start) {
     this.start = start;
 
     // If time parameter wasn't passed in, default is 4 months
-    if (time == undefined) {
+    if (time == undefined || time > 12) {
         this.length = 4;
     }
 
     // If start parameter wasn't passed in, the default starting month is the current month
-    const d = new Date();
-    let curr_year = d.getFullYear();
+    this.day = new Date();
+    let curr_year = this.day.getFullYear();
     let curr_month = 0;
     
     if (start == undefined) {
-        curr_month = d.getMonth();
+        curr_month = this.day.getMonth();
     } else {
         curr_month = start-1;
     }
@@ -118,19 +118,19 @@ function TodoTracker(random, time, start) {
         }
         month_id=1;
     }
-    // console.log(document.querySelector(`#md${11}\\/${22}`).value)
+
 
     // Keeps track of completed list items
     this.completed = {}
     
     // Add button adds an element to the list
-    this.element.querySelector('#add-btn').addEventListener('click', ()=>this.addToList(this.element, this.completed))
+    this.element.querySelector('#add-btn').addEventListener('click', ()=>this.addToList(this.element, this.completed, this.day))
 
     // Enter key adds element to the list (if it's in focus) 
     document.activeElement.addEventListener("keyup", (e)=> {
         if (e.keyCode === 13){
             e.preventDefault();
-            this.addToList(this.element)
+            this.addToList(this.element, this.completed, this.day)
         }
     })
 
@@ -139,7 +139,7 @@ function TodoTracker(random, time, start) {
 
 TodoTracker.prototype = {
 
-    addToList: function(element, completed) {
+    addToList: function(element, completed, today) {
         const todolist = element.querySelector(".ListItems");
         const toAdd = element.querySelector("#todoInput").value
         const child = document.createElement('li')
@@ -154,12 +154,12 @@ TodoTracker.prototype = {
         // Trashcan button deletes the item from list
         child.querySelector('.trashcan').addEventListener('click', (e)=> this.deleteFromList(e, element))
 
-        // Keep track of completed items 
+        // Keep track of completed items; if user checks the task, it's marked as completed
         child.querySelector('#check').addEventListener('change', (e)=> {
             if (e.target.checked){
-                this.addToCompleted(e, element, this.completed)
+                this.addToCompleted(e, element, completed, today)
             } else {
-                this.removeFromCompleted(e, this.completed)
+                this.removeFromCompleted(e, element, completed, today)
             }
         });
         
@@ -172,9 +172,8 @@ TodoTracker.prototype = {
         todolist.removeChild(toRemove)
     },
 
-    addToCompleted: function(e, element, completed) {
+    addToCompleted: function(e, element, completed, today) {
         e.preventDefault();
-        const today = new Date();
         let dateCompleted = today.getMonth()+1 + "/" + today.getDate()
         const completedItem = e.target.parentElement.children[1].innerText
    
@@ -184,7 +183,7 @@ TodoTracker.prototype = {
             completed[dateCompleted]= [completedItem]
         }
         console.log(completed)
-        let curr_square = document.querySelector(`#md${today.getMonth()+1}\\/${today.getDate()}`);
+        let curr_square = element.querySelector(`#md${today.getMonth()+1}\\/${today.getDate()}`);
         let curr_lvl = curr_square.getAttribute("data-level");
         if (curr_lvl < 3) {
             console.log("hi im completed")
@@ -194,19 +193,29 @@ TodoTracker.prototype = {
         
     },
 
-    removeFromCompleted: function(e, completed) {
+    removeFromCompleted: function(e, element, completed, today) {
         e.preventDefault();
-        const today = new Date();
         let dateCompleted = today.getMonth()+1 + "/" + today.getDate()
 
         const completedItem = e.target.parentElement.children[1].innerText
         completed[dateCompleted].splice(completed[dateCompleted].indexOf(completedItem),1)
         
     
-        let curr_square = document.querySelector(`#md${today.getMonth()+1}\\/${today.getDate()}`);
+        let curr_square = element.querySelector(`#md${today.getMonth()+1}\\/${today.getDate()}`);
         let curr_lvl = curr_square.getAttribute("data-level");
         if (curr_lvl > 0) {
             curr_square.setAttribute("data-level", parseInt(curr_lvl)-1)
         }
+
+    },
+
+    changeDate: function(today, new_date) {
+        today.setDate(new_date)
     }
+
+    // TODO: 
+    // - Show date and completed tasks on square click
+    // - Add more lvls and colors so its a wider range
+    // - Add a slider that lets you go to another day, for proof of concept
+    // - Add option to change color (in the code / in the UI maybe?)
 }
