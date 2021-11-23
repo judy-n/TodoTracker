@@ -233,6 +233,16 @@ input:checked:hover {
   list-style: none;
 }
 
-/* lvl 3 rgb(39, 76, 119) */
-/* lvl 2 rgb(139 189 246) */
-/* lvl1 rgb(197 224 255) */
+/* Dropdown styles  */
+
+.dropdown {
+  margin-top: 1rem;
+  margin-left: 1rem;
+}
+
+.dropdown p {
+  background-color: rgb(215, 234, 255);
+  padding: 0.5rem;
+  border-radius: 5px;
+  width: 40%;
+}

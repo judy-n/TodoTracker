@@ -1,6 +1,6 @@
 "use strict";
 
-function TodoTracker(random, time, start) {
+function TodoTracker(random, customDate, time, start) {
 
     // Number of months to have in the graph
     this.length = time;
@@ -112,15 +112,90 @@ function TodoTracker(random, time, start) {
             if (this.randomize) {
                 level = Math.floor(Math.random() * 4);  
             } 
-            // Each has an id in the form "month/day"
+            // Each square has an id in the form "month/day"
             squares.insertAdjacentHTML('beforeend', `<li data-level="${level}" id="md${month_to_display_ids[f]+1}/${month_id}"></li>`);
             month_id++;
         }
         month_id=1;
     }
 
+    // If passed as true, the customDate option creates a dropdown to change the date and simulate a 
+    // longterm use of TodoTracker
+    if (customDate == undefined) {
+        this.custom = false;
+    } else {
+        this.custom = customDate;
+    }
 
-    // Keeps track of completed list items
+    if (this.custom) {
+        let dropd = document.createElement('div')
+        dropd.className = "dropdown";
+        dropd.innerHTML = 
+        `<p>Use the dropdown to try different dates</p>
+        <select name="month" id="month-select">
+            <option value="">Month</option>
+        </select>
+        <select name="day" id="day-select">
+            <option value="">Day</option>
+        </select>`
+        this.element.querySelector(".todolist-container").appendChild(dropd)
+
+        const og_value = this.element.querySelector('#month-select');
+        // Set values to current date
+        const month_select = this.element.querySelector('#month-select')
+        const day_select = this.element.querySelector('#day-select')
+
+        month_select.children[0].innerText = month_names[curr_month];
+        day_select.children[0].innerText = this.day.getDate();
+
+        // Add possible months to dropdown
+        for (let i = 0; i < months_to_display.length; i++){
+            if (months_to_display[i] !== month_names[curr_month]) {
+            let child = document.createElement('option');
+            child.innerText = months_to_display[i]
+            month_select.appendChild(child)
+            }
+        }
+
+        // Add possible days to dropdown - Changes depending on month
+
+        // Setup for current month
+        for (let i = 1; i <= month_days[curr_month]; i++){
+            let child = document.createElement('option');
+            child.innerText = i
+            day_select.appendChild(child)
+        }
+
+
+        month_select.addEventListener('change', ()=> {
+            let selectedMonth = month_select.selectedOptions[0].innerText
+            let num_days_in_month = month_days[month_names.indexOf(selectedMonth)]
+
+            day_select.innerHTML= og_value;
+            for (let i = 0; i <= num_days_in_month; i++){
+                let child = document.createElement('option');
+                child.innerText = i
+                day_select.appendChild(child)
+            }
+            day_select.children[0].innerText = this.day.getDate();
+
+        })
+
+        // Check if month/day were changed, and change today's date accordingly
+        month_select.addEventListener('change', ()=> {
+            let selectedMonth = month_select.selectedOptions[0].innerText
+            this.day.setMonth(month_names.indexOf(selectedMonth))
+        })
+
+        day_select.addEventListener('change', ()=>{
+            let selectedDay = day_select.selectedOptions[0].innerText
+            this.day.setDate(parseInt(selectedDay))
+        })
+
+    }
+
+
+    // Keeps track of completed list items for each date
     this.completed = {}
     
     // Add button adds an element to the list
@@ -182,11 +257,9 @@ TodoTracker.prototype = {
         } else {
             completed[dateCompleted]= [completedItem]
         }
-        console.log(completed)
         let curr_square = element.querySelector(`#md${today.getMonth()+1}\\/${today.getDate()}`);
         let curr_lvl = curr_square.getAttribute("data-level");
         if (curr_lvl < 3) {
-            console.log("hi im completed")
             curr_square.setAttribute("data-level", parseInt(curr_lvl)+ 1)
         }
     
@@ -195,12 +268,19 @@ TodoTracker.prototype = {
 
     removeFromCompleted: function(e, element, completed, today) {
         e.preventDefault();
-        let dateCompleted = today.getMonth()+1 + "/" + today.getDate()
-
         const completedItem = e.target.parentElement.children[1].innerText
-        completed[dateCompleted].splice(completed[dateCompleted].indexOf(completedItem),1)
         
-    
+        for (let i=0; i< Object.keys(completed).length; i++)
+        {
+            for (let k=0; k< completed[Object.keys(completed)[i]].length; k++){
+                if (completed[Object.keys(completed)[i]][k] == completedItem){
+                    completed[Object.keys(completed)[i]].splice(k, 1)
+                    break;
+                }
+            }
+        
+        }
+            
         let curr_square = element.querySelector(`#md${today.getMonth()+1}\\/${today.getDate()}`);
         let curr_lvl = curr_square.getAttribute("data-level");
         if (curr_lvl > 0) {
@@ -209,13 +289,8 @@ TodoTracker.prototype = {
 
     },
 
-    changeDate: function(today, new_date) {
-        today.setDate(new_date)
-    }
-
     // TODO: 
     // - Show date and completed tasks on square click
     // - Add more lvls and colors so its a wider range
-    // - Add a slider that lets you go to another day, for proof of concept
     // - Add option to change color (in the code / in the UI maybe?)
 }
