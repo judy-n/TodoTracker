@@ -209,10 +209,31 @@ function TodoTracker(random, customDate, time, start) {
         }
     })
 
-    document.body.appendChild(this.element)
 }
 
 TodoTracker.prototype = {
+
+    appendTo: function(query) {
+        const parent = document.querySelector(query)
+        if (parent) {
+            parent.appendChild(this.element)
+        }
+    },
+
+    addBefore: function(query) {
+        const sibling = document.querySelector(query)
+        if (sibling) {
+            sibling.before(this.element)
+        }
+    },
+
+
+    addAfter: function(query) {
+        const sibling = document.querySelector(query)
+        if (sibling) {
+            sibling.after(this.element)
+        }
+    },
 
     addToList: function(element, completed, today) {
         const todolist = element.querySelector(".ListItems");
