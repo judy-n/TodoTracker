@@ -1,0 +1,111 @@
+body {
+  font-family: "DM Sans", sans-serif;
+  margin: 0;
+}
+
+.title {
+  background-color: white;
+  padding: 1.5rem;
+  padding-left: 4rem;
+  padding-right: 4rem;
+  border-radius: 2rem;
+  margin-top: 5rem;
+  font-size: 2em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: 0 1px 5px rgb(0 0 0 / 20%);
+}
+
+.header {
+  background-color: #013d6c;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-bottom: 2rem;
+}
+
+.desc {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.desc p {
+  width: 30%;
+  font-size: 18px;
+  margin: 3rem;
+  margin-top: 5rem;
+  background-color: rgb(215, 234, 255);
+  border-radius: 5px;
+  padding: 1rem;
+}
+
+body > div.desc > p.sub {
+  background-color: white;
+  color: #013d6c;
+  border-left: solid 3px #013d6c;
+  border-radius: 0;
+}
+
+.title h1 {
+  margin-bottom: 0;
+  margin-top: 1rem;
+}
+
+.subtitle {
+  font-size: 1.5rem;
+  margin-top: 0;
+  color: #013d6c;
+}
+
+.header .todotracker-container {
+  margin-top: 4rem;
+  padding: 2rem;
+  width: 50%;
+  border-top: solid 5px rgb(84 131 184);
+}
+
+.header .graph {
+  border-radius: 1rem;
+}
+
+.example-cont {
+  display: grid;
+  place-items: center;
+  margin: 3rem;
+}
+
+.example-cont h1 {
+  text-decoration: underline;
+  text-decoration-color: rgb(215, 234, 255);
+}
+
+.dateToday {
+  font-weight: 700;
+}
+
+#p1 {
+  padding: 1rem;
+  width: 30%;
+  font-size: 18px;
+  margin: 3rem;
+  margin-top: 5rem;
+  background-color: rgb(215, 234, 255);
+  border-radius: 5px;
+}
+
+.desc1 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 2rem;
+}
+
+#p2 {
+  padding: 1rem;
+  width: 30%;
+  color: #013d6c;
+  border-left: solid 3px #013d6c;
+}

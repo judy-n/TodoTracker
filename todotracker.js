@@ -199,13 +199,16 @@ function TodoTracker(random, customDate, time, start) {
     this.completed = {}
     
     // Add button adds an element to the list
-    this.element.querySelector('#add-btn').addEventListener('click', ()=>this.addToList(this.element, this.completed, this.day))
+    this.element.querySelector('#add-btn').addEventListener('click', (e)=> { e.preventDefault()
+        this.addToList(this.element, this.completed, this.day)})
 
     // Enter key adds element to the list (if it's in focus) 
     document.activeElement.addEventListener("keyup", (e)=> {
-        if (e.keyCode === 13){
-            e.preventDefault();
-            this.addToList(this.element, this.completed, this.day)
+        if (this.element.contains(document.activeElement)) {
+            if (e.keyCode === 13){
+                e.preventDefault();
+                this.addToList(this.element, this.completed, this.day)
+            }
         }
     })
 

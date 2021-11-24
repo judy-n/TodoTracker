@@ -1,9 +1,12 @@
+/* TodoTracker styles */
+
 body {
   font-family: "Geneva", sans-serif;
 }
 
 .todotracker-container {
   display: flex;
+  /* background-color: white; */
 }
 
 /* - - - - - - - - - - - - - - */
@@ -72,7 +75,8 @@ hr {
   transition: 0.2s;
   list-style-type: none;
   border-top: solid 2px rgb(232, 232, 232);
-  padding: 0.5rem;
+  padding: 0.25rem;
+  padding-bottom: 0.75rem;
   display: flex;
   align-items: center;
 }
@@ -171,6 +175,7 @@ input:checked:hover {
 }
 
 .graph {
+  background-color: white;
   display: inline-grid;
   grid-template-areas:
     "empty months"
@@ -215,17 +220,14 @@ input:checked:hover {
 }
 
 .squares li[data-level="1"] {
-  /* background-color: #c6e48b; */
   background-color: rgb(215, 234, 255);
 }
 
 .squares li[data-level="2"] {
-  /* background-color: #7bc96f; */
   background-color: rgb(150, 197, 250);
 }
 
 .squares li[data-level="3"] {
-  /* background-color: #196127; */
   background-color: #5583b8;
 }
 
