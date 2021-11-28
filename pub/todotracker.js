@@ -241,6 +241,7 @@ TodoTracker.prototype = {
     addToList: function(element, completed, today) {
         const todolist = element.querySelector(".ListItems");
         const toAdd = element.querySelector("#todoInput").value
+        if (!(toAdd.length === 0) && toAdd.trim()) {
         const child = document.createElement('li')
         const lastChild = todolist.children[0]
         child.innerHTML = 
@@ -261,6 +262,7 @@ TodoTracker.prototype = {
                 this.removeFromCompleted(e, element, completed, today)
             }
         });
+    }
         
     },
 
@@ -274,8 +276,7 @@ TodoTracker.prototype = {
     addToCompleted: function(e, element, completed, today) {
         e.preventDefault();
         let dateCompleted = today.getMonth()+1 + "/" + today.getDate()
-        const completedItem = e.target.parentElement.children[1].innerText
-   
+        const completedItem = e.target.parentElement.children[1].innerText  
         if (dateCompleted in completed) {
             completed[dateCompleted].push(completedItem)
         } else {
@@ -287,7 +288,6 @@ TodoTracker.prototype = {
             curr_square.setAttribute("data-level", parseInt(curr_lvl)+ 1)
         }
     
-        
     },
 
     removeFromCompleted: function(e, element, completed, today) {
