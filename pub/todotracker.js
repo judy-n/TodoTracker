@@ -110,7 +110,7 @@ function TodoTracker(random, customDate, time, start) {
     for (let f = 0; f < month_to_display_ids.length; f++){
         for (let h=0; h < month_days[month_to_display_ids[f]]; h++){
             if (this.randomize) {
-                level = Math.floor(Math.random() * 4);  
+                level = Math.floor(Math.random() * 5);  
             } 
             // Each square has an id in the form "month/day"
             squares.insertAdjacentHTML('beforeend', `<li class="tooltip" data-level="${level}" id="md${month_to_display_ids[f]+1}/${month_id}">
@@ -285,7 +285,7 @@ TodoTracker.prototype = {
         }
         let curr_square = element.querySelector(`#md${today.getMonth()+1}\\/${today.getDate()}`);
         let curr_lvl = curr_square.getAttribute("data-level");
-        if (curr_lvl < 3) {
+        if (curr_lvl < 4) {
             curr_square.setAttribute("data-level", parseInt(curr_lvl)+ 1)
         }
 
@@ -340,7 +340,6 @@ TodoTracker.prototype = {
     },
 
     // TODO: 
-    // - Show date and completed tasks on square click
     // - Add more lvls and colors so its a wider range
     // - Add option to change color (in the code / in the UI maybe?)
 }

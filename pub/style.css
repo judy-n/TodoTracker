@@ -36,7 +36,7 @@ body {
 }
 
 .todolist-add a:hover {
-  background: none;
+  background: white;
   color: #5583b8;
   transition: 0.2s;
 }
@@ -229,6 +229,10 @@ input:checked:hover {
 
 .squares li[data-level="3"] {
   background-color: #5583b8;
+}
+
+.squares li[data-level="4"] {
+  background-color: #37608f;
 }
 
 .graph ul {
