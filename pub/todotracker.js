@@ -113,7 +113,8 @@ function TodoTracker(random, customDate, time, start) {
                 level = Math.floor(Math.random() * 4);  
             } 
             // Each square has an id in the form "month/day"
-            squares.insertAdjacentHTML('beforeend', `<li data-level="${level}" id="md${month_to_display_ids[f]+1}/${month_id}"></li>`);
+            squares.insertAdjacentHTML('beforeend', `<li class="tooltip" data-level="${level}" id="md${month_to_display_ids[f]+1}/${month_id}">
+            <span class="tooltiptext"><p>${month_names[month_to_display_ids[f]]} ${month_id}</p></span></li>`);
             month_id++;
         }
         month_id=1;
