@@ -228,11 +228,11 @@ input:checked:hover {
 }
 
 .squares li[data-level="3"] {
-  background-color: #5583b8;
+  background-color: #689fde;
 }
 
 .squares li[data-level="4"] {
-  background-color: #37608f;
+  background-color: #346ba9;
 }
 
 .graph ul {
