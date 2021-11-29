@@ -114,7 +114,7 @@ function TodoTracker(random, customDate, time, start) {
             } 
             // Each square has an id in the form "month/day"
             squares.insertAdjacentHTML('beforeend', `<li class="tooltip" data-level="${level}" id="md${month_to_display_ids[f]+1}/${month_id}">
-            <span class="tooltiptext"><p>${month_names[month_to_display_ids[f]]} ${month_id}</p></span></li>`);
+            <span class="tooltiptext"><p id="month-popup">${month_names[month_to_display_ids[f]]} ${month_id}</p></span></li>`);
             month_id++;
         }
         month_id=1;
@@ -288,18 +288,30 @@ TodoTracker.prototype = {
         if (curr_lvl < 3) {
             curr_square.setAttribute("data-level", parseInt(curr_lvl)+ 1)
         }
+
+        // Add info to hover popup
+        if (completed[dateCompleted].length == 1) {
+            let num_tasks = document.createElement('p')
+        num_tasks.innerText = `1 task`
+        curr_square.children[0].appendChild(num_tasks)
+        } else {
+            curr_square.children[0].children[1].innerText = `${completed[dateCompleted].length} tasks`
+        }
+        
+
     
     },
 
     removeFromCompleted: function(e, element, completed, today) {
         e.preventDefault();
         const completedItem = e.target.parentElement.children[1].innerText
-        
+        let dateCompleted = 0;
         for (let i=0; i< Object.keys(completed).length; i++)
         {
             for (let k=0; k< completed[Object.keys(completed)[i]].length; k++){
                 if (completed[Object.keys(completed)[i]][k] == completedItem){
                     completed[Object.keys(completed)[i]].splice(k, 1)
+                    dateCompleted = Object.keys(completed)[i]
                     break;
                 }
             }
@@ -310,6 +322,19 @@ TodoTracker.prototype = {
         let curr_lvl = curr_square.getAttribute("data-level");
         if (curr_lvl > 0) {
             curr_square.setAttribute("data-level", parseInt(curr_lvl)-1)
+        }
+        
+        // Update popup info
+        let num_tasks = curr_square.children[0].children[1]
+        if (completed[dateCompleted].length == 0) {
+            curr_square.children[0].removeChild(num_tasks)
+        } else {
+            if (completed[dateCompleted].length == 1 ) {
+                num_tasks.innerText = `1 task`
+            } else {
+                num_tasks.innerText = `${completed[dateCompleted].length} tasks`
+            }
+           
         }
 
     },
