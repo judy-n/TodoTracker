@@ -64,7 +64,7 @@ hr {
 .todolist-list ul {
   margin: 0.5rem;
   padding: 0.25rem;
-  overflow: scroll;
+  overflow: auto;
   height: 10rem;
 }
 

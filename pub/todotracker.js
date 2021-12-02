@@ -340,6 +340,5 @@ TodoTracker.prototype = {
     },
 
     // TODO: 
-    // - Add more lvls and colors so its a wider range
     // - Add option to change color (in the code / in the UI maybe?)
 }
