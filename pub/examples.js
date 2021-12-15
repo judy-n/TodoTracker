@@ -11,7 +11,7 @@ todo.addAfter('.title')
 
 
 // Example of default TodoTracker
-const todo_normal = new TodoTracker(false);
+const todo_normal = new TodoTracker();
 todo_normal.addAfter('#ex1')
 
 // Year-long TodoTracker

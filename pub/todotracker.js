@@ -341,4 +341,5 @@ TodoTracker.prototype = {
 
     // TODO: 
     // - Add option to change color (in the code / in the UI maybe?)
+    // - Add dark mode
 }
