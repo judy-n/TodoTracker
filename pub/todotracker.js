@@ -1,29 +1,30 @@
 "use strict";
 
-function TodoTracker(random, customDate, time, start) {
+function TodoTracker(options) {
 
-    // Number of months to have in the graph
-    this.length = time;
+     // Stores the current date
+     this.day = new Date();
+     let curr_year = this.day.getFullYear();
+     let curr_month = this.day.getMonth();
 
-    // Month (1-12) to start the graph from
-    this.start = start;
 
-    // If time parameter wasn't passed in, default is 4 months
-    if (time == undefined || time > 12) {
-        this.length = 4;
+    // Default settings, otherwise use the passed in options 
+    this.options = {
+        start: curr_month+1,
+        time: 4,
+        random: false,
+        customDate: false,
+        color: 'blue',
+        ...options
     }
 
-    // If start parameter wasn't passed in, the default starting month is the current month
-    this.day = new Date();
-    let curr_year = this.day.getFullYear();
-    let curr_month = 0;
-    
-    if (start == undefined) {
-        curr_month = this.day.getMonth();
-    } else {
-        curr_month = start-1;
-    }
-    
+    this.start = this.options.start
+    this.length = this.options.time
+    this.randomize = this.options.random
+    this.custom = this.options.customDate
+    this.color = this.options.color
+
+    curr_month = this.start-1
 
     const month_names = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", 
                     "Sep", "Oct", "Nov", "Dec"]
@@ -50,21 +51,12 @@ function TodoTracker(random, customDate, time, start) {
         j++;
     }
 
-
-    // If random parameter is true, the graph will have random square colors (for proof of concept). 
-    // Otherwise it will start out empty.
-
-    if (random == undefined) {
-        this.randomize = false;
-    } else {
-        this.randomize = random;
-    }
     
     this.element = document.createElement('div')
     this.element.className = "todotracker-container" 
     this.element.innerHTML = 
     `<div class="todolist-container">
-    <div class="todolist-add">
+    <div class="todolist-add ${this.color}">
         <input type="text" spellcheck="false" id="todoInput" placeholder="Type a task here...">
         <a href="#" id="add-btn">+</a>
     </div>
@@ -87,7 +79,7 @@ function TodoTracker(random, customDate, time, start) {
       <li>Fri</li>
       <li>Sat</li>
     </ul>
-    <ul class="squares">
+    <ul class="squares ${this.color}">
     </ul>
     </div>
     `
@@ -118,14 +110,6 @@ function TodoTracker(random, customDate, time, start) {
             month_id++;
         }
         month_id=1;
-    }
-
-    // If passed as true, the customDate option creates a dropdown to change the date and simulate a 
-    // longterm use of TodoTracker
-    if (customDate == undefined) {
-        this.custom = false;
-    } else {
-        this.custom = customDate;
     }
 
     if (this.custom) {
@@ -231,12 +215,19 @@ TodoTracker.prototype = {
         }
     },
 
-
     addAfter: function(query) {
         const sibling = document.querySelector(query)
         if (sibling) {
             sibling.after(this.element)
         }
+    },
+
+    changeColor: function(new_color) {
+        this.color = new_color
+        const list = this.element.querySelector(".todolist-add")
+        const sqrs = this.element.querySelector(".squares")
+        list.className = `todolist-add ${new_color}`
+        sqrs.className = `squares ${new_color}`
     },
 
     addToList: function(element, completed, today) {
@@ -338,8 +329,4 @@ TodoTracker.prototype = {
         }
 
     },
-
-    // TODO: 
-    // - Add option to change color (in the code / in the UI maybe?)
-    // - Add dark mode
 }

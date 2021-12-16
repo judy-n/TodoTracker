@@ -1,3 +1,7 @@
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   font-family: "DM Sans", sans-serif;
   margin: 0;
@@ -86,12 +90,11 @@ body > div.desc > p.sub {
   font-weight: 700;
 }
 
-#p1 {
+.p1 {
   padding: 1rem;
   width: 30%;
   font-size: 18px;
   margin: 3rem;
-  margin-top: 5rem;
   background-color: rgb(215, 234, 255);
   border-radius: 5px;
 }
@@ -103,9 +106,50 @@ body > div.desc > p.sub {
   margin-top: 2rem;
 }
 
-#p2 {
+.p2 {
   padding: 1rem;
   width: 30%;
   color: #013d6c;
   border-left: solid 3px #013d6c;
+}
+
+.nav-links {
+  display: flex;
+  color: rgb(84, 131, 184);
+  margin-top: 2rem;
+  align-self: center;
+  column-gap: 2rem;
+  font-size: 30px;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: rgb(84, 131, 184);
+}
+
+.nav-links a:hover {
+  color: white;
+}
+
+.color-picker {
+  list-style: none;
+  width: 20%;
+}
+
+.color-picker li {
+  padding: 1rem;
+  background-color: rgb(240, 246, 255);
+  border-radius: 15px;
+  margin-bottom: 1rem;
+  cursor: pointer;
+  align-self: center;
+}
+
+.color-picker li:hover {
+  background-color: rgb(215, 234, 255);
+}
+
+.themes-cont {
+  display: flex;
+  column-gap: 2rem;
 }

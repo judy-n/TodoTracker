@@ -27,7 +27,6 @@ body {
   box-sizing: border-box;
   padding-left: 0.5rem;
   padding-right: 0.5rem;
-  color: #274c77;
   background-color: #5583b8;
   color: white;
   font-size: 2em;
@@ -40,6 +39,69 @@ body {
   color: #5583b8;
   transition: 0.2s;
 }
+
+/* Different theme colors */
+
+/* Blue */
+.todolist-add.blue a {
+  border: 2px solid #5583b8;
+  background-color: #5583b8;
+}
+
+.todolist-add.blue a:hover {
+  background: white;
+  color: #5583b8;
+  transition: 0.2s;
+}
+
+/* Pink */
+.todolist-add.pink a {
+  border: 2px solid #ff8fa3;
+  background-color: #ff8fa3;
+}
+
+.todolist-add.pink a:hover {
+  background: white;
+  color: #ff8fa3;
+  transition: 0.2s;
+}
+
+/* Orange */
+.todolist-add.orange a {
+  border: 2px solid #ff8800;
+  background-color: #ff8800;
+}
+
+.todolist-add.orange a:hover {
+  background: white;
+  color: #ff8800;
+  transition: 0.2s;
+}
+
+/* Green */
+.todolist-add.green a {
+  border: 2px solid #268559;
+  background-color: #268559;
+}
+
+.todolist-add.green a:hover {
+  background: white;
+  color: #268559;
+  transition: 0.2s;
+}
+
+/* Gray */
+.todolist-add.gray a {
+  border: 2px solid black;
+  background-color: black;
+}
+
+.todolist-add.gray a:hover {
+  background: white;
+  color: black;
+  transition: 0.2s;
+}
+/* ------ */
 
 .todolist-add input {
   outline: none;
@@ -83,7 +145,6 @@ hr {
 
 .todolist-container {
   width: 35%;
-  /* border-right: 2px dashed rgb(232, 232, 232); */
 }
 
 .todolist-list ul li:hover {
@@ -219,21 +280,98 @@ input:checked:hover {
   background-color: #ebedf0;
 }
 
-.squares li[data-level="1"] {
+/* Different color themes */
+
+/* Blue */
+
+.squares.blue li[data-level="1"] {
   background-color: rgb(215, 234, 255);
 }
 
-.squares li[data-level="2"] {
+.squares.blue li[data-level="2"] {
   background-color: rgb(150, 197, 250);
 }
 
-.squares li[data-level="3"] {
+.squares.blue li[data-level="3"] {
   background-color: #689fde;
 }
 
-.squares li[data-level="4"] {
+.squares.blue li[data-level="4"] {
   background-color: #346ba9;
 }
+
+/* Pink */
+
+.squares.pink li[data-level="1"] {
+  background-color: #ffe4e9;
+}
+
+.squares.pink li[data-level="2"] {
+  background-color: #faacba;
+}
+
+.squares.pink li[data-level="3"] {
+  background-color: #ff758f;
+}
+
+.squares.pink li[data-level="4"] {
+  background-color: #f44f6d;
+}
+
+/* Green */
+
+.squares.green li[data-level="1"] {
+  background-color: #d8f3dc;
+}
+
+.squares.green li[data-level="2"] {
+  background-color: #95d5b2;
+}
+
+.squares.green li[data-level="3"] {
+  background-color: #52b788;
+}
+
+.squares.green li[data-level="4"] {
+  background-color: #268559;
+}
+
+/* Orange */
+
+.squares.orange li[data-level="1"] {
+  background-color: #ffde8c;
+}
+
+.squares.orange li[data-level="2"] {
+  background-color: #ffb700;
+}
+
+.squares.orange li[data-level="3"] {
+  background-color: #ffb700;
+}
+
+.squares.orange li[data-level="4"] {
+  background-color: #ff8800;
+}
+
+/* Gray */
+.squares.gray li[data-level="1"] {
+  background-color: #dadada;
+}
+
+.squares.gray li[data-level="2"] {
+  background-color: #9999a1;
+}
+
+.squares.gray li[data-level="3"] {
+  background-color: #66666e;
+}
+
+.squares.gray li[data-level="4"] {
+  background-color: #000000;
+}
+
+/* ------ */
 
 .graph ul {
   list-style: none;
@@ -282,11 +420,6 @@ input:checked:hover {
 .tooltip:hover .tooltiptext {
   visibility: visible;
 }
-
-/* #month-popup {
-  text-decoration-line: underline;
-  text-decoration-style: dashed;
-} */
 
 /* Dropdown styles  */
 
