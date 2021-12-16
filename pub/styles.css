@@ -153,3 +153,23 @@ body > div.desc > p.sub {
   display: flex;
   column-gap: 2rem;
 }
+
+details {
+  margin: 2rem;
+  width: 50%;
+  padding: 0.5rem;
+}
+
+pre {
+  background-color: #eaedf0;
+  margin: 0;
+  padding: 0.5rem;
+  font-size: 15px;
+}
+
+summary {
+  border-bottom: solid 2px #5483b8;
+  color: #5483b8;
+  width: 15%;
+  padding: 0.5rem;
+}

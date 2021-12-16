@@ -36,16 +36,36 @@
             <p class="p1">This is the basic interface for a TodoTracker.</p>
             <p class="p2">Today is <span class="dateToday"></span>, so any tasks you tick off will update that day's square.</p>
         </div>
-
+        <details>
+            <summary>Code</summary>
+            <code>
+                <pre>const todo = new TodoTracker()</pre>
+                <pre>todo.addAfter('#ex1')</pre>
+              </code>
+        </details>
         <div class="desc1" id="ex2">
             <p class="p1">With default settings, the graph spans over 4 months. But you can easily change the range & the starting month!</p>
             <p class="p2">Here's a year-long one, filled out for display purposes.</p>
         </div>
+        <details>
+            <summary>Code</summary>
+            <code>
+                <pre>const todo_year = new TodoTracker({random: true, time: 12})</pre>
+                <pre>todo_year.addAfter('#ex2')</pre>
+              </code>
+        </details>
 
         <div class="desc1" id="ex3">
             <p class="p1">I've added a dropdown under this one to simulate adding tasks on different days.</p>
             <p class="p2">Try it out! Choose different dates and tick off tasks to see the graph get filled.</p>
         </div>
+        <details>
+            <summary>Code</summary>
+            <code>
+                <pre>const todo_choose = new TodoTracker({customDate: true, start: 10})</pre>
+                <pre>todo_choose.addAfter('#ex3')</pre>
+              </code>
+        </details>
 
     </div>
     <div id="themes" class="example-cont">
@@ -73,6 +93,15 @@
                 </li>
             </ul>
         </div>
+        <details>
+            <summary>Code</summary>
+            <code>
+                <pre>const todo_color = new TodoTracker({random: true, color: 'blue'})</pre>
+                <pre>todo_color.appendTo('.themes-cont')</pre>
+                <pre>// Can also call a method to change color</pre>
+                <pre>todo_color.changeColor('green')</pre>
+              </code>
+        </details>
     </div>
     
     
