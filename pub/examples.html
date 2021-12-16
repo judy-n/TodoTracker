@@ -14,32 +14,64 @@
 </head>
 <body>
     <div class="header">
+        <div class="nav-links">
+            <a href="#examples">Examples</a>
+            <a href="#themes">Themes</a>
+            <a href="#">Docs</a>
+        </div>
         <div class="title">
             <h1>TodoTracker.js</h1>
-            <p class="subtitle">Productivity has never been this satisfying</p>
+            <p class="subtitle">Display your productivity over time</p>
         </div>
     </div>
     <div class="desc">
         <p>TodoTracker lets you add tasks to a to-do list and track your productivity over time,
-             in a way similar to the Github contribution graph.</p>
+             in a way similar to the GitHub contribution graph.</p>
         <p class="sub">A darker colored square means more tasks completed on that day!</p>
     </div>
 
-    <div class="example-cont">
+    <div id="examples" class="example-cont">
         <h1 class="ex-title">Examples</h1>
         <div class="desc1" id="ex1">
-            <p id="p1">This is the basic interface for a TodoTracker.</p>
-            <p id="p2">Today is <span class="dateToday"></span>, so any tasks you tick off will update that day's square.</p>
+            <p class="p1">This is the basic interface for a TodoTracker.</p>
+            <p class="p2">Today is <span class="dateToday"></span>, so any tasks you tick off will update that day's square.</p>
         </div>
 
         <div class="desc1" id="ex2">
-            <p id="p1">With default settings, the graph spans over 4 months. However, you can easily change the range & the starting month!</p>
-            <p id="p2">Here's a year-long one, filled out for display purposes.</p>
+            <p class="p1">With default settings, the graph spans over 4 months. But you can easily change the range & the starting month!</p>
+            <p class="p2">Here's a year-long one, filled out for display purposes.</p>
         </div>
 
         <div class="desc1" id="ex3">
-            <p id="p1">I've added a dropdown under this one to simulate adding tasks on different days.</p>
-            <p id="p2">Try it out! Choose different dates and tick off tasks to see the graph get filled.</p>
+            <p class="p1">I've added a dropdown under this one to simulate adding tasks on different days.</p>
+            <p class="p2">Try it out! Choose different dates and tick off tasks to see the graph get filled.</p>
+        </div>
+
+    </div>
+    <div id="themes" class="example-cont">
+        <h1 class="ex-title">Themes</h1>
+         <div class="desc1" id="ex4">
+            <p class="p1">TodoTracker has different color themes to choose from.</p>
+            <p class="p2">Check them out! Click on the tabs on the side to try the current themes.</p>
+        </div>
+        <div class="themes-cont">
+            <ul class="color-picker">
+                <li onclick="changeColor('blue');">
+                    Blue
+                </li>
+                <li onclick="changeColor('green');">
+                   Green
+                </li>
+                <li onclick="changeColor('orange');">
+                    Orange
+                </li>
+                <li onclick="changeColor('pink');">
+                    Pink
+                </li>
+                <li onclick="changeColor('gray');">
+                    Gray
+                </li>
+            </ul>
         </div>
     </div>
     
