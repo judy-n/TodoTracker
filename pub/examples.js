@@ -24,7 +24,6 @@ todo_choose.addAfter('#ex3')
 
 const todo_color = new TodoTracker({random: true});
 todo_color.appendTo('.themes-cont')
-// todo_color.changeColor('orange')
 
 function changeColor(color) {
     todo_color.changeColor(color)

@@ -1,5 +1,7 @@
 "use strict";
 
+(function(global, document) { 
+
 function TodoTracker(options) {
 
      // Stores the current date
@@ -330,3 +332,5 @@ TodoTracker.prototype = {
 
     },
 }
+global.TodoTracker = global.TodoTracker || TodoTracker
+})(window, window.document);
