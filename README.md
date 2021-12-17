@@ -1,7 +1,7 @@
 # TodoTracker.js
 https://todotrackerjs.herokuapp.com
 
-###Getting Started
+### Getting Started
 
 - First, download the files TodoTracker.js and TodoTracker.css and import them in your HTML file.
 
@@ -18,7 +18,7 @@ Then you can add it before, after, or append it to any container in the DOM.
 
 `todo.addAfter('.title')`
 
-###Documentation
+### Documentation
 
 Check out the full documentation here:
 
