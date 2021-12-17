@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="docs.css">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;700&display=swap" rel="stylesheet">
+    <title>Docs</title>
+</head>
+<body>
+    <div class="header">
+        <div class="nav-links">
+            <a href="examples.html">Home</a>
+        </div>
+    </div>
+    <h1 class="doc">Documentation</h1>
+    <div class="section">
+        <h1>Getting Started</h1>
+        <div class="step">
+            <p>First, download the files TodoTracker.js and TodoTracker.css and import them in your HTML file. </p>
+        <code>
+        <pre>&lt;script defer src="todotracker.js">&lt;/script> </pre>
+        <pre>&lt;link rel="stylesheet" href="todotracker.css"> </pre>
+        </code>
+        </div>
+        <div class="step">
+            <p>Create a TodoTracker object in your JavaScript file. With no parameters, the default will span over 4 months starting from the current one, and have a blue theme.</p>
+        <code>
+        <pre>const todo = new TodoTracker()</pre>
+        </code>
+        <p>Then you can add it before, after, or append it to any container in the DOM.</p>
+        <code>
+            <pre>todo.addAfter('.title')</pre>
+        </code>
+        </div>
+    </div>
+    <div class="section">
+        <h1>API</h1>
+        <div class="step">
+            <p>A TodoTracker object takes an optional parameter: an <code>options</code> object.</p>
+            <pre>const todo = new TodoTracker(options)</pre>
+            <p><code>options</code> takes the properties below. Passing in any property will replace it, otherwise it keeps the default value.</p>
+        </div>        
+    </div>
+    <div class="option-table">
+        <h1>options</h1>
+        <table class="options">
+            <thead>
+                <tr>
+                    <th>Property</th>
+                    <th>Default</th>
+                    <th>Type</th>
+                    <th>Description</th>
+                </tr>
+                <tbody>
+                    <tr>
+                        <td class="prop">start</td>
+                        <td>The current month</td>
+                        <td>Int</td>
+                        <td>The month number (1-12) that the productivity graph starts from.</td>
+                    </tr>
+                    <tr>
+                        <td class="prop">time</td>
+                        <td>4</td>
+                        <td>Int</td>
+                        <td>The length (max. value is 12) that the graph spans over.</td>
+                    </tr>
+                    <tr>
+                        <td class="prop">color</td>
+                        <td>'blue'</td>
+                        <td>String</td>
+                        <td>The color theme. You can choose between: 
+                            <ul>
+                                <li>'blue'</li>
+                                <li>'green'</li>
+                                <li>'orange'</li>
+                                <li>'pink'</li>
+                                <li>'grey'</li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="prop">random</td>
+                        <td>false</td>
+                        <td>Boolean</td>
+                        <td>Setting this to true will fill the graph squares with randomly distributed shades. Mainly used for displaying purposes or a proof of concept.</td>
+                    </tr>
+                    <tr>
+                        <td class="prop">customDate</td>
+                        <td>false</td>
+                        <td>Boolean</td>
+                        <td>Setting this to true adds a dropdown menu that lets you choose any date and tick off tasks for it.d</td>
+                    </tr>
+                </tbody>
+            </thead>
+        </table>
+    </div>
+</body>
+</html>

@@ -1,0 +1,94 @@
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: "DM Sans", sans-serif;
+  margin: 0;
+}
+
+.section {
+  align-self: center;
+  margin: 3rem;
+}
+
+.nav-links {
+  width: 100%;
+  height: 6rem;
+  display: flex;
+  margin-right: 4rem;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: rgb(84, 131, 184);
+  font-size: 25px;
+}
+
+.nav-links a:hover {
+  color: white;
+}
+
+.header {
+  display: flex;
+  background-color: #013d6c;
+}
+
+.section h1 {
+  color: #013d6c;
+  font-weight: normal;
+}
+
+.doc {
+  text-align: center;
+  text-decoration: underline;
+  text-decoration-color: rgb(215, 234, 255);
+}
+
+.step {
+  border-left: solid 2px #013d6c;
+  padding-left: 1rem;
+  margin-bottom: 3rem;
+}
+
+.step pre {
+  background-color: #eaedf0;
+  margin: 0;
+  padding: 0.5rem;
+  font-size: 15px;
+  width: fit-content;
+}
+
+table {
+  width: 100%;
+  text-align: left;
+  border-spacing: 0;
+}
+
+.option-table h1 {
+  color: #013d6c;
+  font-weight: normal;
+}
+
+.option-table {
+  margin: 3rem;
+}
+
+td {
+  padding-top: 1rem;
+  width: 20%;
+  padding-bottom: 1rem;
+  border-bottom: solid 2px #eaedf0;
+}
+
+.prop {
+  color: #013d6c;
+  font-weight: bold;
+}
+
+th {
+  background-color: #eaedf0;
+  padding: 1rem;
+}
